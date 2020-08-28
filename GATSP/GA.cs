@@ -11,7 +11,7 @@ namespace GA
             int PopulationSize { get; }
             readonly Func<T, T, T> mateFunction;
             readonly Func<T> creatorFunction;
-            List<T> population;
+            public List<T> population;
             public float top, reproduction;
             public GA(int populationSize, Func<T, T, T> mateFunction, Func<T> creatorFunction,
                 float reproduction,

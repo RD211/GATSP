@@ -30,7 +30,7 @@ namespace GATSP
             var dia = new OpenFileDialog();
             if(dia.ShowDialog()==DialogResult.OK)
             {
-                DataManager.InitializePoints(dia.FileName);
+                DataManager.InitializePointsTSPFormat(dia.FileName);
             }
         }
         public static TourGenome Mate(TourGenome a, TourGenome b)
@@ -86,7 +86,11 @@ namespace GATSP
         GA<TourGenome> ga;
         private void btn_start_Click(object sender, EventArgs e)
         {
-            ga = new GA<TourGenome>(50000, Mate, Create, 0.5f, 0.1f);
+            ga = new GA<TourGenome>(1000, Mate, Create, 0.5f, 0.1f);
+            GreedySolver.Solve();
+            var greedy = new TourGenome();
+            greedy.genome = GreedySolver.path;
+            ga.population[0] = greedy;
             timer_evolve.Start();
             chart_evolution.Series.Clear();
             //chart_derivative.Series.Clear();
@@ -166,6 +170,20 @@ namespace GATSP
         private void btn_export_Click(object sender, EventArgs e)
         {
             File.WriteAllText("path.txt", string.Join(" ", ga.GetBestContender().genome));
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show(GreedySolver.Solve().ToString());
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            var dia = new OpenFileDialog();
+            if (dia.ShowDialog() == DialogResult.OK)
+            {
+                DataManager.InitializePointsNormalFormat(dia.FileName);
+            }
         }
     }
 }

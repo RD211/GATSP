@@ -55,6 +55,7 @@
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="GA.cs" />
+    <Compile Include="GreedySolver.cs" />
     <Compile Include="IGenome.cs" />
     <Compile Include="ListExtensions.cs" />
     <Compile Include="PointFExtensions.cs" />
